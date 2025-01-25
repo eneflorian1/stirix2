@@ -1,1 +1,63 @@
-body {\n  font-family: Arial, sans-serif;\n}\n\n.news-card {\n  transition: transform 0.2s ease-in-out;\n}\n\n.news-card:hover {\n  transform: translateY(-2px);\n}\n\n.loading-skeleton {\n  animation: loading 1.5s infinite;\n  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);\n  background-size: 200% 100%;\n}\n\n@keyframes loading {\n  0% { background-position: 200% 0; }\n  100% { background-position: -200% 0; }\n}
+/* Fallback și efecte custom peste Tailwind */
+body {
+  font-family: 'Inter', Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Card effects */
+.news-card {
+  transition: all 0.3s ease-in-out;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+.news-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Loading skeleton animation */
+.loading-skeleton {
+  animation: loading 1.5s infinite;
+  background: linear-gradient(
+    90deg,
+    rgba(226, 232, 240, 0) 0%,
+    rgba(226, 232, 240, 0.8) 50%,
+    rgba(226, 232, 240, 0) 100%
+  );
+  background-size: 200% 100%;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Header gradient animation */
+header {
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* Button hover effect */
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(66, 153, 225, 0.2);
+}
+
+/* Error icon pulse */
+.error-icon {
+  animation: errorPulse 2s infinite;
+}
+
+@keyframes errorPulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+  100% { transform: scale(1); }
+}
