@@ -1,1 +1,25 @@
-const express = require("express");\nconst fs = require("fs");\nconst path = require("path");\n\nconst app = express();\nconst PORT = process.env.PORT || 3000;\n\napp.use(express.static(path.join(__dirname, "public")));\n\nconst dataDir = path.join(__dirname, "data");\nif (!fs.existsSync(dataDir)) {\n    fs.mkdirSync(dataDir);\n}\n\napp.get("/api/news", async (req, res) => {\n    try {\n        const response = await fetch("https://agentx.site/trends.json");\n        const data = await response.json();\n        res.json(data);\n    } catch (error) {\n        console.error("Error fetching trends:", error);\n        res.status(500).json({ error: "Failed to fetch trends" });\n    }\n});\n\napp.listen(PORT, () => {\n    console.log(`Server running on http://localhost:${PORT}`);\n});
+const express = require("express");
+const path = require("path");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Serve static files
+app.use(express.static(path.join(__dirname, "public")));
+
+// API endpoint
+app.get("/api/news", async (req, res) => {
+    try {
+        const response = await fetch("https://agentx.site/trends.json");
+        if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        console.error("Server error:", error);
+        res.status(500).json({ error: "Failed to fetch trends" });
+    }
+});
+
+app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+});
